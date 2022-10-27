@@ -37,7 +37,7 @@ exports.getAllItemsHandler = async (event) => {
     } catch (ResourceNotFoundException) {
         response = {
             statusCode: 404,
-            body: "Unable to call DynamoDB. Table resource not found."
+            body: "Unable to call DynamoDB. Table resource not found. " + ResourceNotFoundException
         };
     }
 
