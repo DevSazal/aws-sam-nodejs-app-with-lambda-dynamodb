@@ -1,0 +1,11 @@
+version = 0.1
+[cndx-dev]
+[cndx-dev.deploy]
+[cndx-dev.deploy.parameters]
+stack_name = "sazal-test-serverless-api"
+s3_bucket = "aws-sam-cli-managed-default-samclisourcebucket-8svyb44cki2m"
+s3_prefix = "sazal-test-serverless-api"
+region = "eu-central-1"
+profile = "cndx-dev"
+capabilities = "CAPABILITY_IAM"
+image_repositories = []
