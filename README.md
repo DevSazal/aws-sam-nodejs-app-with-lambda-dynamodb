@@ -1,4 +1,4 @@
-# aws-sam-serverless-api
+# aws-sam-serverless-api-typescript
 
 This project contains source code and supporting files for a serverless application that you can deploy with the AWS Serverless Application Model (AWS SAM) command line interface (CLI). It includes the following files and folders:
 
@@ -40,7 +40,7 @@ To build and deploy your application for the first time, run the following in yo
 
 ```bash
 sam build
-sam deploy --guided
+sam deploy --guided --profile {profile-name} --region {region}
 ```
 
 The first command will build the source of your application. The second command will package and deploy your application to AWS, with a series of prompts:
@@ -102,7 +102,7 @@ Resources:
   getAllItemsFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: src/handlers/get-all-items.getAllItemsHandler
+      Handler: src/handlers/get-all-items.handler
       Runtime: nodejs14.x
       DeadLetterQueue:
         Type: SQS 
@@ -129,7 +129,7 @@ To simplify troubleshooting, the AWS SAM CLI has a command called `sam logs`. `s
 **NOTE:** This command works for all Lambda functions, not just the ones you deploy using AWS SAM.
 
 ```bash
-my-application$ sam logs -n putItemFunction --stack-name sam-app --tail
+my-application$ sam logs -n putItemFunction --stack-name {stack-name} --tail
 ```
 
 **NOTE:** This uses the logical name of the function within the stack. This is the correct name to use when searching logs inside an AWS Lambda function within a CloudFormation stack, even if the deployed function name varies due to CloudFormation's unique resource name generation.
@@ -150,7 +150,7 @@ my-application$ npm run test
 To delete the sample application that you created, use the AWS CLI. Assuming you used your project name for the stack name, you can run the following:
 
 ```bash
-aws cloudformation delete-stack --stack-name sazal-test-serverless-api
+aws cloudformation delete-stack --stack-name {stack-name}
 ```
 
 ## Resources

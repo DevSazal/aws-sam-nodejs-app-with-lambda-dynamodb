@@ -1,16 +1,31 @@
 {
-    "name": "delete-test-01",
-    "description": "delete-test-01-description",
+    "name": "sazal-sam-test-app-serverless-api",
+    "description": "simple aws serverless-api for TypeScript, NodeJS",
     "version": "0.0.1",
     "private": true,
     "dependencies": {
-        "aws-sdk": "^2.799.0"
+        "aws-sdk": "^2.799.0",
+        "esbuild": "^0.14.54"
     },
     "devDependencies": {
-        "jest": "^26.6.3"
+        "@types/aws-lambda": "^8.10.108",
+        "@types/jest": "^27.4.0",
+        "@types/node": "^18.11.9",
+        "@typescript-eslint/eslint-plugin": "^5.10.2",
+        "@typescript-eslint/parser": "^5.10.2",
+        "esbuild-jest": "^0.5.0",
+        "eslint": "^8.8.0",
+        "eslint-config-prettier": "^8.3.0",
+        "eslint-plugin-prettier": "^4.0.0",
+        "jest": "^27.5.0",
+        "prettier": "^2.5.1",
+        "ts-node": "^10.4.0",
+        "typescript": "^4.9.3"
     },
     "scripts": {
-        "test": "jest"
+        "unit": "jest",
+        "lint": "eslint '*.ts' --quiet --fix",
+        "compile": "tsc",
+        "test": "npm run compile && npm run unit"
     }
 }
-

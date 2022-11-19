@@ -1,3 +1,4 @@
+import { APIGatewayProxyEvent, APIGatewayProxyResult } from 'aws-lambda';
 // Create clients and set shared const values outside of the handler.
 
 // Get the DynamoDB table name from environment variables
@@ -10,7 +11,7 @@ const docClient = new dynamodb.DocumentClient();
 /**
  * A simple example includes a HTTP get method to get all items from a DynamoDB table.
  */
-exports.getAllItemsHandler = async (event) => {
+ const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult> => {
     if (event.httpMethod !== 'GET') {
         throw new Error(`getAllItems only accept GET method, you tried: ${event.httpMethod}`);
     }
@@ -21,7 +22,7 @@ exports.getAllItemsHandler = async (event) => {
     // https://docs.aws.amazon.com/AWSJavaScriptSDK/latest/AWS/DynamoDB/DocumentClient.html#scan-property
     // https://docs.aws.amazon.com/amazondynamodb/latest/APIReference/API_Scan.html
 
-    let response = {};
+    let response : { statusCode: number, body: string };
 
     try {
         const params = {
@@ -45,3 +46,5 @@ exports.getAllItemsHandler = async (event) => {
     console.info(`response from: ${event.path} statusCode: ${response.statusCode} body: ${response.body}`);
     return response;
 }
+
+export const handler = main;
