@@ -33,11 +33,11 @@ Resources:
       Policies:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref SazalDynamoDBtable
       Environment:
         Variables:
           # Make table name accessible as environment variable from function code during execution
-          SAMPLE_TABLE: !Ref SampleTable
+          SAMPLE_TABLE: !Ref SazalDynamoDBtable
       Events:
         Api:
           Type: Api
@@ -70,11 +70,11 @@ Resources:
       Policies:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref SazalDynamoDBtable
       Environment:
         Variables:
           # Make table name accessible as environment variable from function code during execution
-          SAMPLE_TABLE: !Ref SampleTable
+          SAMPLE_TABLE: !Ref SazalDynamoDBtable
       Events:
         Api:
           Type: Api
@@ -107,11 +107,11 @@ Resources:
       Policies:
         # Give Create/Read/Update/Delete Permissions to the SampleTable
         - DynamoDBCrudPolicy:
-            TableName: !Ref SampleTable
+            TableName: !Ref SazalDynamoDBtable
       Environment:
         Variables:
           # Make table name accessible as environment variable from function code during execution
-          SAMPLE_TABLE: !Ref SampleTable
+          SAMPLE_TABLE: !Ref SazalDynamoDBtable
       Events:
         Api:
           Type: Api
@@ -130,17 +130,21 @@ Resources:
   # https://github.com/awslabs/serverless-application-model/blob/master/versions/2016-10-31.md#awsserverlesssimpletable
 
   # DynamoDB table to store item: {id: &lt;ID&gt;, name: &lt;NAME&gt;}
-  SampleTable:
-    Type: AWS::Serverless::SimpleTable
+  SazalDynamoDBtable:
+    Type: AWS::DynamoDB::Table
     Properties:
-      PrimaryKey:
-        Name: id
-        Type: String
+      AttributeDefinitions:
+        - AttributeName: id
+          AttributeType: S
+      KeySchema:
+        - AttributeName: id
+          KeyType: HASH
       ProvisionedThroughput:
         ReadCapacityUnits: 2
         WriteCapacityUnits: 2
+      TableName: !Sub ${AWS::StackName}-data
 
 Outputs:
   WebEndpoint:
-    Description: "API Gateway endpoint URL for Prod stage"
+    Description: "API Gateway endpoint URL for development stage"
     Value: !Sub "https://${ServerlessRestApi}.execute-api.${AWS::Region}.amazonaws.com/Prod/"

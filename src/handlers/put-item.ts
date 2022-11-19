@@ -43,7 +43,7 @@ const main = async (event: APIGatewayProxyEvent): Promise<APIGatewayProxyResult>
     } catch (ResourceNotFoundException) {
         response = {
             statusCode: 404,
-            body: 'Unable to call DynamoDB. Table resource not found.x ' + ResourceNotFoundException,
+            body: 'Unable to call DynamoDB. Table resource not found. ' + ResourceNotFoundException,
         };
     }
 
